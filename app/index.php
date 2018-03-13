@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require '../vendor/autoload.php';
-require_once './Autoloader.php';
+$loader = require '../vendor/autoload.php';
+$loader->addPsr4('Models\\', __DIR__ . '/models');
+$loader->addPsr4('Controllers\\', __DIR__ . '/controllers');
 
-\App\Autoloader::register();
 
 $app = new Slim\App([
     'settings' => [
@@ -28,10 +28,12 @@ $container = $app->getContainer();
 $capsule = new Illuminate\Database\Capsule\Manager();
 $capsule->addConnection($container['settings']['db']);
 $capsule->setAsGlobal();
-//$capsule->bootEloquent();
+$capsule->bootEloquent();
 
 $app->get('/', function ($request, $response, $args) {
-    return $response->getBody()->write("Hello world");
+    $data = \Models\Image::all();
+
+    return $response->withJson($data, 200);
 });
 
 $app->get('/hello/{name}', function ($request, $response, $args) {
@@ -44,7 +46,7 @@ $container['db'] = function($container) use ($capsule) {
 };
 
 $container['HomeController'] = function ($c) {
-    return new \App\Controllers\HomeController($c);
+    return new \Controllers\HomeController($c);
 };
 
 try {
