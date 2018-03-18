@@ -7,9 +7,12 @@ CREATE TABLE images (
 
 CREATE TABLE pieces_types (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `location` ENUM('Interieur', 'Exterieur') NOT NULL,
   `libelle` VARCHAR(255),
+  `images_id` INT(11) NOT NULL,
 
-  CONSTRAINT PK_pieces_types PRIMARY KEY (`id`)
+  CONSTRAINT PK_pieces_types PRIMARY KEY (`id`),
+  CONSTRAINT FK_pieces_types_image FOREIGN KEY (`images_id`) REFERENCES images(`id`)
 );
 
 CREATE TABLE works (
@@ -32,7 +35,6 @@ CREATE TABLE devis (
 CREATE TABLE pieces (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `libelle` VARCHAR(255),
-  `location` ENUM('Interieur', 'Exterieur') NOT NULL,
   `pieces_type_id` INT(11) NOT NULL,
   `images_id` INT(11) NOT NULL,
 

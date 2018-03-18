@@ -13,4 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 class PieceType extends Model
 {
     protected $table = "pieces_types";
+
+    public function image() {
+        return $this->belongsTo('\Models\Image', 'images_id', 'id');
+    }
 }

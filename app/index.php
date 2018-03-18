@@ -1,5 +1,9 @@
 <?php
 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -7,7 +11,7 @@ error_reporting(E_ALL);
 $loader = require '../vendor/autoload.php';
 $loader->addPsr4('Models\\', __DIR__ . '/models');
 $loader->addPsr4('Controllers\\', __DIR__ . '/controllers');
-
+$loader->addPsr4('Services\\', __DIR__ . '/services');
 
 $app = new Slim\App([
     'settings' => [
@@ -30,23 +34,19 @@ $capsule->addConnection($container['settings']['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$app->get('/', function ($request, $response, $args) {
-    $data = \Models\Image::all();
+$app->get('/', \Controllers\HomeController::class . ':home');
 
-    return $response->withJson($data, 200);
-});
+$app->get('/piece-types', \Controllers\PieceTypeController::class . ':findAll');
+$app->get('/piece-types/{id}', \Controllers\PieceTypeController::class . ':find');
 
-$app->get('/hello/{name}', function ($request, $response, $args) {
-    return $response->getBody()->write("Hello, " . $args['name']);
-});
-
+$app->get('/piece-types/{pieceId}/pieces', \Controllers\PieceController::class . ':findAll');
+$app->get('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':find');
+$app->post('/piece-types/{pieceId}/pieces', \Controllers\PieceController::class . ':create');
+$app->put('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':update');
+$app->delete('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':delete');
 
 $container['db'] = function($container) use ($capsule) {
   return $capsule;
-};
-
-$container['HomeController'] = function ($c) {
-    return new \Controllers\HomeController($c);
 };
 
 try {
