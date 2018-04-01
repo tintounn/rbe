@@ -19,6 +19,7 @@ class PieceService
         if ($limit) {
             $request = $request->take($limit);
         }
+        $request = $request->with(['image']);
 
         return $request->get();
     }

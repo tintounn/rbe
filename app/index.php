@@ -39,11 +39,11 @@ $app->get('/', \Controllers\HomeController::class . ':home');
 $app->get('/piece-types', \Controllers\PieceTypeController::class . ':findAll');
 $app->get('/piece-types/{id}', \Controllers\PieceTypeController::class . ':find');
 
-$app->get('/piece-types/{pieceId}/pieces', \Controllers\PieceController::class . ':findAll');
-$app->get('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':find');
-$app->post('/piece-types/{pieceId}/pieces', \Controllers\PieceController::class . ':create');
-$app->put('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':update');
-$app->delete('/piece-types/{pieceId}/pieces/{id}', \Controllers\PieceController::class . ':delete');
+$app->get('/piece-types/{pieceTypeId}/pieces', \Controllers\PieceController::class . ':findAll');
+$app->get('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':find');
+$app->post('/piece-types/{pieceTypeId}/pieces', \Controllers\PieceController::class . ':create');
+$app->put('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':update');
+$app->delete('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':delete');
 
 $container['db'] = function($container) use ($capsule) {
   return $capsule;

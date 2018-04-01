@@ -1,37 +1,40 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Row, Col, Grid } from 'react-flexbox-grid';
+import { Col, Grid } from 'react-flexbox-grid';
 
 import './App.css';
 
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import ContactPage from './pages/ContactPage';
+import DevisPage from './pages/DevisPage';
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <Grid fluid={true}>
-          <header>
-            <h1>RBE</h1>
+        <div id="main">
+          <div id="info">
+          <div id="img-info">
+            <img style={{width: '300px', display: 'inline-block', align: 'left'}} src="http://images.rbe.com/base/rbe-icon-header.png" />
+            <img style={{width: '650px', display: 'inline-block', align: 'right', 'margin-left': '64px'}} src="http://images.rbe.com/base/info.png" />
+          </div>
+          </div>
+          <div id="content">
+            <Grid>
 
-            <Row>
-              <Col xs={4}><Link to="/">Accueil</Link></Col>
-              <Col xs={4}><Link to="/devis">Demande de pre-devis</Link></Col>
-              <Col xs={4}><Link to="/contact">Contact</Link></Col>
-            </Row>
-          </header>
+              <Route exact={true} path="/" component={HomePage}/>
+              <Route exact={true} path="/admin" component={AdminPage}/>
+              <Route exact={true} path="/contact" component={ContactPage}/>
+              <Route exact={true} path="/devis" component={DevisPage}/>
 
-          <Route exact={true} path="/" component={HomePage}/>
-          <Route exact={true} path="/admin" component={AdminPage}/>
-          <Route exact={true} path="/contact" component={ContactPage}/>
-
-          <hr/>
-          <footer>
-            <Col><Link to="/admin">Admin</Link></Col>
-          </footer>
-        </Grid>
+              <hr/>
+              <footer>
+                <Col><Link to="/admin">Admin</Link></Col>
+              </footer>
+            </Grid>
+          </div>
+        </div>
       </Router>
     );
   }

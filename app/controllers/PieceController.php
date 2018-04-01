@@ -24,6 +24,7 @@ class PieceController
                 $limit = $filters['limit'];
                 unset($filters['limit']);
             }
+            $filters['pieces_type_id'] = $args['pieceTypeId'];
 
             $data = $pieceService->findAll($filters, $limit);
 

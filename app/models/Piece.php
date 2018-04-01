@@ -13,4 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 class Piece extends Model
 {
     protected $table = "pieces";
+
+    public function image() {
+        return $this->belongsTo('\Models\Image', 'images_id', 'id');
+    }
+
 }
