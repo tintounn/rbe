@@ -17,10 +17,12 @@ CREATE TABLE pieces_types (
 
 CREATE TABLE works (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `libelle` VARCHAR(255) NOT NULL,
-  `date` DATE NOT NULL,
+  `ville` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `images_id` INT(11) NOT NULL,
 
-  CONSTRAINT PK_works PRIMARY KEY (`id`)
+  CONSTRAINT PK_works PRIMARY KEY (`id`),
+  CONSTRAINT FK_works_images FOREIGN KEY (`images_id`) REFERENCES images(`id`)
 );
 
 
@@ -45,13 +47,13 @@ CREATE TABLE pieces (
 
 CREATE TABLE works_days (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `libelle` VARCHAR(255) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
   `date` DATE NOT NULL,
   `works_id` INT(11) NOT NULL,
-  `images_id` INT(11) NOT NULL,
 
   CONSTRAINT PK_works_days PRIMARY KEY (`id`),
-  CONSTRAINT FK_works_days FOREIGN KEY (`works_id`) REFERENCES works(`id`),
-  CONSTRAINT FK_works_days_images FOREIGN KEY (`images_id`) REFERENCES images(`id`)
+  CONSTRAINT FK_works_days FOREIGN KEY (`works_id`) REFERENCES works(`id`)
 );
 
 
