@@ -3,6 +3,7 @@ import { Row, Col } from 'react-flexbox-grid';
 
 import PieceTypeStand from '../components/PieceTypeStand';
 import ContactPage from './ContactPage';
+import { Jumbotron } from 'reactstrap';
 
 interface HomePageProps {}
 interface HomePageState {}
@@ -33,7 +34,9 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
           <div className="piece-stand"><PieceTypeStand location={'plan'}/></div>
         </Col>
         <Col sm={12} md={6}>
+        <Jumbotron style={{color: 'black'}}>
           <ContactPage />
+          </Jumbotron>
         </Col>
       </Row>
       </>

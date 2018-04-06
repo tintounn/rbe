@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ChangeEvent, FormEvent } from 'react';
+import { Input, Button, Form } from 'reactstrap';
 
 interface ContactPageProps {}
 interface ContactPageState {
@@ -18,7 +19,7 @@ class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onTextAreaValueChange(event: ChangeEvent<HTMLTextAreaElement>) {
+  onTextAreaValueChange(event: ChangeEvent<HTMLInputElement>) {
     const target = event.target;
     const name: string = target.name;
     const value: string = target.value;
@@ -46,33 +47,33 @@ class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
   render() {
     return (
       <>
-        <h2>Page de contact</h2>
+        <h2>Formulaire de contact</h2>
         <p>Cette page pour permer de contacter RBE au sujet d'un point qui vous interesse</p>
 
-        <form onSubmit={this.onFormSubmit}>
+        <Form onSubmit={this.onFormSubmit}>
           <label>
             Votre email
           </label>
-          <input onChange={this.onInputValueChange} name="email" type="text" placeholder="Votre email pour recontact"/>
+          <Input onChange={this.onInputValueChange} name="email" type="text" placeholder="Votre email pour recontact"/>
 
           <br/>
 
           <label>
             Sujet de la demande
           </label>
-          <input onChange={this.onInputValueChange} name="sujet" type="text" placeholder="Le sujet de votre demande"/>
+          <Input onChange={this.onInputValueChange} name="sujet" type="text" placeholder="Le sujet de votre demande"/>
 
           <br/>
 
           <label>
             Message de votre demande
           </label>
-          <textarea onChange={this.onTextAreaValueChange} name="body" />
+          <Input type="textarea" onChange={this.onTextAreaValueChange} name="body" />
 
           <br/>
 
-          <input type="submit" value="Envoyer" />
-        </form>
+          <Button style={{width: '100%'}} color="warning">Envoyer</Button>
+        </Form>
       </>
     );
   }
