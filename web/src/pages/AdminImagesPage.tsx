@@ -158,7 +158,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
                     <div><img style={{width: '100%'}} src="http://www.avm-menuiseries.fr/media/ebook/jpg/bois/7A.jpg"/></div>
                   </Col>
                   <Col xs={6}>
-                    <p>Ordre: 2</p>
+                    <p>Ordre: 1</p>
                   </Col>
                   <Col xs={2}>
                     <Button color="danger">X</Button>

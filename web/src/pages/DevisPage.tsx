@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import PieceTypeInterface from '../interfaces/PieceTypeInterface';
-import { Form, Input, Button } from 'reactstrap';
+import { Form, Input, Button, Jumbotron } from 'reactstrap';
 import { Col, Row } from 'react-flexbox-grid';
 
 interface DevisPageProps {}
@@ -95,11 +95,14 @@ class DevisPage extends React.Component<DevisPageProps, DevisPageState> {
     return (
       <>
         <h2>Page de demande de pre-devis</h2>
-        <p>Cette page vous permez de faire une demande de pre-devis pour evaluer la faisabilité des travaux</p>
+        <p>Cette page vous permez de faire une demande de pre-devis pour evaluer la faisabilité des travaux.</p>
 
-        <Form onSubmit={this.onFormSubmit}>
+        <Form style={{color: 'black'}} onSubmit={this.onFormSubmit}>
           <Row>
             <Col sm={12} md={6}>
+              <Jumbotron style={{height: '100%'}}>
+              <h5><b>Informations generales</b></h5>
+              <hr/>
               <label>
                 Nom
               </label>
@@ -132,12 +135,20 @@ class DevisPage extends React.Component<DevisPageProps, DevisPageState> {
                 Societé (non obligatoire)
               </label>
               <Input onChange={this.onInputValueChange} name="societe" type="text" placeholder="Nom de votre societé"/>
+
+              <br/>
+              <label>
+                Description des travaux
+              </label>
+              <Input onChange={this.onInputValueChange} name="societe" type="textarea" placeholder="Description des travaux souhaités"/>
+
+              </Jumbotron>
             </Col>
 
             <Col sm={12} md={6}>
-              <label>
-                Types de piece souhaités
-              </label>
+              <Jumbotron  style={{height: '100%'}}>
+              <h5><b>Pièces souhaités</b></h5>
+              <hr/>
 
               <Row>
                 <Col sm={4}>
@@ -147,7 +158,7 @@ class DevisPage extends React.Component<DevisPageProps, DevisPageState> {
                   x2
                 </Col>
                 <Col sm={4}>
-                  <Button color="danger" onClick={this.onPieceTypeAdd}>Supprimer</Button>
+                  <Button color="danger" style={{width: '100%'}} onClick={this.onPieceTypeAdd}>Supprimer</Button>
                 </Col>
               </Row>
               <hr/>
@@ -159,7 +170,7 @@ class DevisPage extends React.Component<DevisPageProps, DevisPageState> {
                   x1
                 </Col>
                 <Col sm={4}>
-                  <Button color="danger" onClick={this.onPieceTypeAdd}>Supprimer</Button>
+                  <Button color="danger" style={{width: '100%'}} onClick={this.onPieceTypeAdd}>Supprimer</Button>
                 </Col>
               </Row>
               
@@ -175,17 +186,17 @@ class DevisPage extends React.Component<DevisPageProps, DevisPageState> {
                   <Input onChange={this.onInputValueChange} name="pieceQteSelected" type="number"/>
                 </Col>
                 <Col sm={4}>
-                  <Button color="primary" onClick={this.onPieceTypeAdd}>Ajouter</Button>
+                  <Button color="primary" style={{width: '100%'}} onClick={this.onPieceTypeAdd}>Ajouter</Button>
                 </Col>
               </Row>
+              </Jumbotron>
             </Col>
           </Row>
-
           <br/>
-
           <Row>
-          <Button color="warning">Envoyer</Button>
+            <Button style={{width: '100%'}} color="warning">Envoyer</Button>
           </Row>
+
         </Form>
       </>
     );
