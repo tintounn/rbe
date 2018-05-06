@@ -7,10 +7,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import ContactPage from './pages/ContactPage';
-import DevisPage from './pages/DevisPage';
 import AdminImagesPage from './pages/AdminImagesPage';
-import AdminDevisPage from './pages/AdminDevisPage';
-import AdminTravauxPage from './pages/AdminTravauxPage';
 
 class App extends React.Component {
   render() {
@@ -29,10 +26,7 @@ class App extends React.Component {
                 <Route exact={true} path="/" component={HomePage}/>
                 <Route exact={true} path="/admin" component={AdminLoginPage}/>
                 <Route exact={true} path="/admin-images" component={AdminImagesPage}/>
-                <Route exact={true} path="/admin-devis" component={AdminDevisPage}/>
-                <Route exact={true} path="/admin-travaux" component={AdminTravauxPage}/>
                 <Route exact={true} path="/contact" component={ContactPage}/>
-                <Route exact={true} path="/devis" component={DevisPage}/>
 
                 <hr/>
                 <footer>

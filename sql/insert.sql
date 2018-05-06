@@ -17,3 +17,17 @@ INSERT INTO rbe.pieces(libelle, pieces_type_id, images_id)VALUES('Porte en chain
 INSERT INTO rbe.pieces(libelle, pieces_type_id, images_id)VALUES('Colimasson', 6, 2);
 
 
+
+
+
+
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Exterieur', 'exterieur_window.png', 1);
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Exterieur', 'exterieur_window.png', 2);
+
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Interieur', 'exterieur_window.png', 1);
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Interieur', 'exterieur_window.png', 2);
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Interieur', 'exterieur_window.png', 3);
+
+INSERT INTO rbe.pieces(libelle, location, path, `ordre`)VALUES('Bois de chaine', 'Plan', 'exterieur_window.png', 1);
+
+

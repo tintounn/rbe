@@ -16,11 +16,6 @@ class PieceService
     public function findAll(array $filter = [], $limit = null)
     {
         $request = Piece::where($filter, '=');
-        if ($limit) {
-            $request = $request->take($limit);
-        }
-        $request = $request->with(['image']);
-
         return $request->get();
     }
 
@@ -36,10 +31,13 @@ class PieceService
 
     public function update($id, array $data)
     {
-        return Piece::find($id)->update($data);
+        $piece = Piece::find($id);
+        $piece->ordre = $data['ordre'];
+        return $piece->save();
     }
 
     public function delete($id) {
-        return Piece::delete($id);
+        $piece = Piece::where('id', $id)->first();
+        $piece->delete();
     }
 }

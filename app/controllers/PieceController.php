@@ -24,7 +24,6 @@ class PieceController
                 $limit = $filters['limit'];
                 unset($filters['limit']);
             }
-            $filters['pieces_type_id'] = $args['pieceTypeId'];
 
             $data = $pieceService->findAll($filters, $limit);
 
@@ -46,9 +45,13 @@ class PieceController
 
     public function create($request, $response, $args)
     {
+        if(empty($_SESSION['connected'])) {
+            return $response->withJson(['message' => 'forbidden'], 403);
+        }
+
         try {
             $pieceService = new PieceService();
-            return $response->withJson(['piece' => $pieceService->create($request->getBody())], 201);
+            return $response->withJson(['piece' => $pieceService->create($request->getParsedBody())], 201);
         } catch(\Exception $e) {
             return $response->withJson(['message' => $e->getMessage()], 500);
         }
@@ -56,9 +59,13 @@ class PieceController
 
     public function update($request, $response, $args)
     {
+        if(empty($_SESSION['connected'])) {
+            return $response->withJson(['message' => 'forbidden'], 403);
+        }
+
         try {
             $pieceService = new PieceService();
-            return $response->withJson(['piece' => $pieceService->update($args['id'], $request->getBody())], 201);
+            return $response->withJson(['piece' => $pieceService->update($args['id'], $request->getParsedBody())], 201);
         } catch(\Exception $e) {
             return $response->withJson(['message' => $e->getMessage()], 500);
         }
@@ -66,6 +73,10 @@ class PieceController
 
     public function delete($request, $response, $args)
     {
+        if(empty($_SESSION['connected'])) {
+            return $response->withJson(['message' => 'forbidden'], 403);
+        }
+
         try {
             $pieceService = new PieceService();
             return $response->withJson(['piece' => $pieceService->delete($args['id'])], 201);

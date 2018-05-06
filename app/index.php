@@ -1,8 +1,10 @@
 <?php
+session_start();
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS, POST');
 header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type,Accept');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -34,16 +36,13 @@ $capsule->addConnection($container['settings']['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
-$app->get('/', \Controllers\HomeController::class . ':home');
+$app->post('/login', \Controllers\HomeController::class . ':login');
 
-$app->get('/piece-types', \Controllers\PieceTypeController::class . ':findAll');
-$app->get('/piece-types/{id}', \Controllers\PieceTypeController::class . ':find');
-
-$app->get('/piece-types/{pieceTypeId}/pieces', \Controllers\PieceController::class . ':findAll');
-$app->get('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':find');
-$app->post('/piece-types/{pieceTypeId}/pieces', \Controllers\PieceController::class . ':create');
-$app->put('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':update');
-$app->delete('/piece-types/{pieceTypeId}/pieces/{id}', \Controllers\PieceController::class . ':delete');
+$app->get('/pieces', \Controllers\PieceController::class . ':findAll');
+$app->get('/pieces/{id}', \Controllers\PieceController::class . ':find');
+$app->post('/pieces', \Controllers\PieceController::class . ':create');
+$app->put('/pieces/{id}', \Controllers\PieceController::class . ':update');
+$app->delete('/pieces/{id}', \Controllers\PieceController::class . ':delete');
 
 $container['db'] = function($container) use ($capsule) {
   return $capsule;

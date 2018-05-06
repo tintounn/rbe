@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { Input, Button, Form, FormGroup, Jumbotron } from 'reactstrap';
+import axios from 'axios';
+import { Redirect } from 'react-router';
+
+import { Input, Button, Form, FormGroup, Jumbotron, Alert } from 'reactstrap';
 import { Col } from 'react-flexbox-grid';
 
 interface AdminLoginPageProps {}
 interface AdminLoginPageState {
   password: string;
+  error: boolean;
+  connected: boolean;
 }
 
 class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPageState> {
@@ -12,8 +17,13 @@ class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPage
   constructor(props: AdminLoginPageProps) {
     super(props);
     
+    this.onInputValueChange = this.onInputValueChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
+
     this.state = {
-      password: ''
+      password: '',
+      error: false,
+      connected: false,
     };
   }
   
@@ -28,23 +38,40 @@ class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPage
   }
   
   onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    axios.post('http://api.rbe.com/login', {
+      code: this.state.password
+    }).then((res) => {
+      this.setState({connected: true});
+    }).catch((err) => {
+      this.setState({error: true});
+    });
+
     event.preventDefault();
   }
   
   render() {
+    let redirect = <></>;
+    if (this.state.connected) {
+      redirect = <Redirect to="/admin-images"/>;
+    }
+    
     return (
       <Jumbotron style={{color: 'black'}}>
+      {redirect}
       <Col smOffset={4} sm={4} >
-        <Form onSubmit={this.onFormSubmit}>
+      <Alert hidden={!this.state.error} color="danger">
+        Code administrateur invalide.
+      </Alert>
+        <Form>
           <FormGroup>
             <label>
             Code admin
             </label>
-            <Input onChange={this.onInputValueChange} name="password" type="text" placeholder="Votre code administrateur"/>
+            <Input onChange={this.onInputValueChange} name="password" type="password" placeholder="Votre code administrateur"/>
           </FormGroup>
         
           <FormGroup>
-            <Button style={{width: '100%'}} color="warning">Connexion</Button>
+            <Button onClick={this.onFormSubmit} style={{width: '100%'}} color="warning">Connexion</Button>
           </FormGroup>
         </Form>
       </Col>
