@@ -45,13 +45,23 @@ class PieceController
 
     public function create($request, $response, $args)
     {
-        if(empty($_SESSION['connected'])) {
+        /*if(empty($_SESSION['connected'])) {
             return $response->withJson(['message' => 'forbidden'], 403);
-        }
+        }*/
 
         try {
             $pieceService = new PieceService();
-            return $response->withJson(['piece' => $pieceService->create($request->getParsedBody())], 201);
+            $uploadedFiles = $request->getUploadedFiles();
+            $body = $request->getParsedBody();
+
+            $uploadedFile = $uploadedFiles['file'];
+            if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
+                $filename = moveUploadedFile(__DIR__ . '/../../images', $uploadedFile);
+            }
+
+            $body['path'] = $filename;
+            $body['ordre'] = 1;
+            return $response->withJson(['piece' => $pieceService->create($body)], 201);
         } catch(\Exception $e) {
             return $response->withJson(['message' => $e->getMessage()], 500);
         }
@@ -59,7 +69,7 @@ class PieceController
 
     public function update($request, $response, $args)
     {
-        if(empty($_SESSION['connected'])) {
+        if(!isset($_SESSION['connected'])) {
             return $response->withJson(['message' => 'forbidden'], 403);
         }
 

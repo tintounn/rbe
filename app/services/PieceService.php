@@ -26,7 +26,12 @@ class PieceService
 
     public function create(array $data)
     {
-        return Piece::create($data);
+        $piece = new Piece();
+        $piece->libelle = $data['libelle'];
+        $piece->path = $data['path'];
+        $piece->ordre = $data['ordre'];
+        $piece->save();
+        return $piece;
     }
 
     public function update($id, array $data)
