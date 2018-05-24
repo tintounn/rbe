@@ -128,7 +128,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
       return (
         <Col xs={12} md={4} lg={3} key={elt.id}>
           <Card>
-            <CardImg top={true} width="100%"  style={{maxHeight: '480px'}} src={'http://images.rbe.com/' + elt.path} alt={elt.libelle} />
+            <CardImg top={true} width="100%"  style={{maxHeight: '480px'}} src={'http://www.images.rbe-ouest.com/' + elt.path} alt={elt.libelle} />
             <CardBody>
               <CardTitle>{elt.libelle}</CardTitle>
               <FormGroup>
