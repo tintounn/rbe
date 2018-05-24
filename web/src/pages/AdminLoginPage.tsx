@@ -38,7 +38,7 @@ class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPage
   }
   
   onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    axios.post('http://api.rbe.com/login', {
+    axios.post('http://www.api.rbe-ouest.com/login', {
       code: this.state.password
     }).then((res) => {
       this.setState({connected: true});

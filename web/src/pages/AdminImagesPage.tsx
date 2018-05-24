@@ -42,7 +42,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
   refreshList() {
     axios({
       method: 'GET',
-      url: 'http://api.rbe.com/pieces',
+      url: 'http://www.api.rbe-ouest.com/pieces',
       params: {
         location: this.state.location
       }
@@ -67,7 +67,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
     const target = event.target;
     const value: string = target.value;
 
-    axios.put('http://api.rbe.com/pieces/' + this.state.pieces[index].id, {
+    axios.put('http://www.api.rbe-ouest.com/pieces/' + this.state.pieces[index].id, {
       ordre: value
     }).then((res) => {
       this.refreshList();
@@ -77,7 +77,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
   }
 
   onDelete(index: number) {
-    axios.delete('http://api.rbe.com/pieces/' + this.state.pieces[index].id)
+    axios.delete('http://www.api.rbe-ouest.com/pieces/' + this.state.pieces[index].id)
       .then((res) => {
         this.refreshList();
     }).catch((err) => {
@@ -91,7 +91,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
     data.append('file', this.state.file);
     data.append('location', this.state.location);
 
-    axios.post('http://api.rbe.com/pieces', data)
+    axios.post('http://www.api.rbe-ouest.com/pieces', data)
       .then((res) => {
         console.log(res);
       }).catch((err) => {

@@ -26,7 +26,7 @@ class PieceTypeStand extends React.Component<PieceTypeStandProps, PieceTypeStand
   componentWillMount() {
     axios({
       method: 'GET',
-      url: 'http://api.rbe.com/pieces?location=',
+      url: 'http://www.api.rbe-ouest.com/pieces?location=',
       params: {
         location: this.props.location
       }
@@ -40,7 +40,7 @@ class PieceTypeStand extends React.Component<PieceTypeStandProps, PieceTypeStand
   }
 
   render() {
-    const basePath = 'http://images.rbe.com/';
+    const basePath = 'http://www.images.rbe-ouest.com/';
 
     let pieces = this.state.pieces.sort((a: PieceInterface, b: PieceInterface) => {
       if (a.ordre < b.ordre) {

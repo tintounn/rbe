@@ -29,7 +29,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         <Col sm={12} md={6}>
           <div className="piece-stand"><PieceTypeStand location={'interieur'}/></div>
         </Col>
-        <img src="http://images.rbe.com/base/info-mesure.png" />
+        <img src="http://www.images.rbe-ouest.com/base/info-mesure.png" />
         <Col sm={12} md={6}>
           <div className="piece-stand"><PieceTypeStand location={'plan'}/></div>
         </Col>
