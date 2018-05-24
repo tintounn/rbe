@@ -30,6 +30,7 @@ class PieceService
         $piece->libelle = $data['libelle'];
         $piece->path = $data['path'];
         $piece->ordre = $data['ordre'];
+        $piece->location = $data['location'];
         $piece->save();
         return $piece;
     }

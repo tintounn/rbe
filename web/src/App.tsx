@@ -16,8 +16,8 @@ class App extends React.Component {
         <div id="main">
           <div id="info">
           <div id="img-info">
-            <img style={{width: '300px', display: 'inline-block', align: 'left'}} src="http://images.rbe.com/base/rbe-icon-header.png" />
-            <img style={{width: '650px', display: 'inline-block', align: 'right', 'margin-left': '64px'}} src="http://images.rbe.com/base/info.png" />
+            <Link to="/"><img style={{width: '300px', display: 'inline-block', align: 'left'}} src="http://images.rbe-ouest.com/base/rbe-icon-header.png" /></Link>
+            <img style={{width: '650px', display: 'inline-block', align: 'right', 'margin-left': '64px'}} src="http://images.rbe-ouest.com/base/info.png" />
           </div>
           </div>
           <div id="content">

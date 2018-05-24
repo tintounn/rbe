@@ -23,7 +23,7 @@ class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPage
     this.state = {
       password: '',
       error: false,
-      connected: false,
+      connected: (sessionStorage.getItem('rbe_token') ? true : false),
     };
   }
   
@@ -38,9 +38,10 @@ class AdminLoginPage extends React.Component<AdminLoginPageProps, AdminLoginPage
   }
   
   onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    axios.post('http://www.api.rbe-ouest.com/login', {
+    axios.post('http://api.rbe-ouest.com/login', {
       code: this.state.password
     }).then((res) => {
+      sessionStorage.setItem('rbe_token', res.data.connected);
       this.setState({connected: true});
     }).catch((err) => {
       this.setState({error: true});

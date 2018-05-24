@@ -1,8 +1,12 @@
 <?php
+error_reporting(E_ALL);
+ini_set('session.save_path',realpath(dirname($_SERVER['DOCUMENT_ROOT']) . '/../sessions'));
+session_set_cookie_params(0, '/', 'api.rbe-ouest.com');
+session_start();
+
 
 use Slim\Http\UploadedFile;
 
-session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS, POST');
@@ -11,7 +15,6 @@ header('Access-Control-Allow-Headers: Content-Type,Accept');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 $loader = require '../vendor/autoload.php';
 $loader->addPsr4('Models\\', __DIR__ . '/models');
@@ -51,6 +54,7 @@ function moveUploadedFile($directory, UploadedFile $uploadedFile)
 }
 
 $app->post('/login', \Controllers\HomeController::class . ':login');
+$app->post('/contact', \Controllers\HomeController::class . ':contact');
 
 $app->get('/pieces', \Controllers\PieceController::class . ':findAll');
 $app->get('/pieces/{id}', \Controllers\PieceController::class . ':find');

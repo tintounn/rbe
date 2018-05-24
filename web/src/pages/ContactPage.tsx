@@ -1,18 +1,34 @@
 import * as React from 'react';
 import { ChangeEvent, FormEvent } from 'react';
 import { Input, Button, Form } from 'reactstrap';
+import axios from 'axios';
+import Alert from 'reactstrap/lib/Alert';
 
 interface ContactPageProps {}
 interface ContactPageState {
   email: string;
   sujet: string;
   body: string;
+  result: string;
+  success: boolean;
+  n1: number;
+  n2: number;
 }
 
 class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
 
   constructor(props: ContactPageProps) {
     super(props);
+
+    this.state = {
+      success: false,
+      email: '',
+      sujet: '',
+      body: '',
+      result: '',
+      n1: Math.round(Math.random() * 10),
+      n2: Math.round(Math.random() * 10)
+    };
 
     this.onTextAreaValueChange = this.onTextAreaValueChange.bind(this);
     this.onInputValueChange = this.onInputValueChange.bind(this);
@@ -40,15 +56,37 @@ class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
   }
 
   onFormSubmit(event: FormEvent<HTMLFormElement>) {
-    console.log(this.state);
     event.preventDefault();
+    if (this.state.n1 + this.state.n2 !== parseInt(this.state.result, 0)) {
+      alert('Captcha incorrect');
+      return;
+    }
+
+    let data = new FormData();
+    data.append('sujet', this.state.sujet);
+    data.append('email', this.state.email);
+    data.append('body', this.state.body);
+
+    axios.post('http://api.rbe-ouest.com/contact', data)
+      .then((res) => {
+        this.setState({
+          success: true,
+          n1: Math.round(Math.random() * 10),
+          n2: Math.round(Math.random() * 10)
+        });
+      }).catch((err) => {
+      console.error(err);
+    });
   }
 
   render() {
     return (
       <>
         <h2>Formulaire de contact</h2>
-        <p>Cette page pour permer de contacter RBE au sujet d'un point qui vous interesse</p>
+
+        <Alert hidden={!this.state.success} color="success">
+          Message envoyé !
+        </Alert>
 
         <Form onSubmit={this.onFormSubmit}>
           <label>
@@ -69,6 +107,11 @@ class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
             Message de votre demande
           </label>
           <Input type="textarea" onChange={this.onTextAreaValueChange} name="body" />
+
+          <label>
+            {this.state.n1} + {this.state.n2} =
+          </label>
+          <Input type="text" name="result" onChange={this.onInputValueChange} />
 
           <br/>
 

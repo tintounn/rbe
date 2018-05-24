@@ -8,7 +8,6 @@
 
 namespace Controllers;
 
-
 use Services\PieceService;
 
 class PieceController
@@ -19,10 +18,13 @@ class PieceController
             $pieceService = new PieceService();
             $filters = $request->getQueryParams();
             $limit = null;
-
             if(!empty($filters['limit'])) {
                 $limit = $filters['limit'];
                 unset($filters['limit']);
+            }
+
+            if(!empty($filters['token'])) {
+                unset($filters['token']);
             }
 
             $data = $pieceService->findAll($filters, $limit);
@@ -45,10 +47,6 @@ class PieceController
 
     public function create($request, $response, $args)
     {
-        /*if(empty($_SESSION['connected'])) {
-            return $response->withJson(['message' => 'forbidden'], 403);
-        }*/
-
         try {
             $pieceService = new PieceService();
             $uploadedFiles = $request->getUploadedFiles();
@@ -69,10 +67,6 @@ class PieceController
 
     public function update($request, $response, $args)
     {
-        if(!isset($_SESSION['connected'])) {
-            return $response->withJson(['message' => 'forbidden'], 403);
-        }
-
         try {
             $pieceService = new PieceService();
             return $response->withJson(['piece' => $pieceService->update($args['id'], $request->getParsedBody())], 201);
@@ -83,10 +77,6 @@ class PieceController
 
     public function delete($request, $response, $args)
     {
-        if(empty($_SESSION['connected'])) {
-            return $response->withJson(['message' => 'forbidden'], 403);
-        }
-
         try {
             $pieceService = new PieceService();
             return $response->withJson(['piece' => $pieceService->delete($args['id'])], 201);

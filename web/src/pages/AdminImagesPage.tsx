@@ -42,9 +42,10 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
   refreshList() {
     axios({
       method: 'GET',
-      url: 'http://www.api.rbe-ouest.com/pieces',
+      url: 'http://api.rbe-ouest.com/pieces',
       params: {
-        location: this.state.location
+        location: this.state.location,
+        token: sessionStorage.getItem('rbe_token')
       }
     }).then((res) => {
       this.setState({
@@ -67,8 +68,9 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
     const target = event.target;
     const value: string = target.value;
 
-    axios.put('http://www.api.rbe-ouest.com/pieces/' + this.state.pieces[index].id, {
-      ordre: value
+    axios.put('http://api.rbe-ouest.com/pieces/' + this.state.pieces[index].id, {
+      ordre: value,
+      token: sessionStorage.getItem('rbe_token')
     }).then((res) => {
       this.refreshList();
     }).catch((err) => {
@@ -77,7 +79,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
   }
 
   onDelete(index: number) {
-    axios.delete('http://www.api.rbe-ouest.com/pieces/' + this.state.pieces[index].id)
+    axios.delete('http://api.rbe-ouest.com/pieces/' + this.state.pieces[index].id)
       .then((res) => {
         this.refreshList();
     }).catch((err) => {
@@ -90,10 +92,11 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
     data.append('libelle', this.state.description);
     data.append('file', this.state.file);
     data.append('location', this.state.location);
+    data.append('token', sessionStorage.getItem('rbe_token'));
 
-    axios.post('http://www.api.rbe-ouest.com/pieces', data)
+    axios.post('http://api.rbe-ouest.com/pieces', data)
       .then((res) => {
-        console.log(res);
+        this.refreshList();
       }).catch((err) => {
         console.error(err);
     });
@@ -116,6 +119,10 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
   }
 
   render() {
+    if (!this.state.pieces) {
+      return <p>Chargement...</p>;
+    }
+
     const pieces = this.state.pieces.sort((a: PieceInterface, b: PieceInterface) => {
       if (a.ordre < b.ordre) {
         return -1;
@@ -128,7 +135,7 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
       return (
         <Col xs={12} md={4} lg={3} key={elt.id}>
           <Card>
-            <CardImg top={true} width="100%"  style={{maxHeight: '480px'}} src={'http://www.images.rbe-ouest.com/' + elt.path} alt={elt.libelle} />
+            <CardImg top={true} width="100%"  style={{height: '240px'}} src={'http://images.rbe-ouest.com/' + elt.path} alt={elt.libelle} />
             <CardBody>
               <CardTitle>{elt.libelle}</CardTitle>
               <FormGroup>
@@ -145,15 +152,15 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
       <div style={{width: '100%'}}>
         <Row>
           <Col md={4} xs={12}>
-            <Button style={{width: '100%'}} onClick={() => this.handleOnLocationClick('exterieur')} color="warning">Exterieur</Button>
+            <Button style={{width: '100%'}} disabled={(this.state.location === 'exterieur')} onClick={() => this.handleOnLocationClick('exterieur')} color="warning">Exterieur</Button>
           </Col>
 
           <Col md={4} xs={12}>
-            <Button style={{width: '100%'}} onClick={() => this.handleOnLocationClick('interieur')} color="warning">Interieur</Button>
+            <Button style={{width: '100%'}} disabled={(this.state.location === 'interieur')} onClick={() => this.handleOnLocationClick('interieur')} color="warning">Interieur</Button>
           </Col>
 
           <Col md={4} xs={12}>
-            <Button style={{width: '100%'}} onClick={() => this.handleOnLocationClick('plan')} color="warning">Plan</Button>
+            <Button style={{width: '100%'}} disabled={(this.state.location === 'plan')} onClick={() => this.handleOnLocationClick('plan')} color="warning">Plan</Button>
           </Col>
         </Row>
         <br/>
