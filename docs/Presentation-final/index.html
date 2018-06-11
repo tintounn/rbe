@@ -28,7 +28,7 @@
                 <p>Design' Partner travaille dans 2 activités différentes: </p>
                 <ul>
                     <li class="fragment">Conception et developpement de projet pour les clients.</li>
-                    <li class="fragment">Vente et marquage de textiles et objects publicitaires.</li>
+                    <li class="fragment">Vente et marquage de textiles et objets publicitaires.</li>
                 </ul>
                 <p><u>Conception de projet minoritaire.</u></p>
             </section>
@@ -59,13 +59,13 @@
             </section>
             <section data-background="ressources/background/white-background3.png">
                 <h2>Les service de l'entreprise</h2>
-                <div id="containerServiceEntreprise" class="textAlignJustify">
-                    <div class="fragment"><img src="ressources/icons/ic_accessibility_white_24px.svg" alt="Production">La Production</div>
-                    <div class="fragment"><img src="ressources/icons/ic_call_white_24px.svg" alt="Service client">Le service client</div>
-                    <div class="fragment"><img src="ressources/icons/ic_shopping_cart_white_24px.svg" alt="Préparation">Le service préparation</div>
-                    <div class="fragment"><img src="ressources/icons/ic_build_white_24px.svg" alt="Maintenance">La maintenance</div>
-                    <div class="fragment"><img src="ressources/icons/ic_local_shipping_white_24px.svg" alt="Expedition">L'expedition</div>
+                <div id="containerServiceEntreprise" class="textAlignJustify">        
                     <div class="fragment"><img src="ressources/icons/ic_code_white_24px.svg" alt="Equipe de développement">L'équipe de développement</div>
+                    <div class="fragment"><img src="ressources/icons/ic_shopping_cart_white_24px.svg" alt="Préparation">Le service préparation</div>
+                    <div class="fragment"><img src="ressources/icons/ic_accessibility_white_24px.svg" alt="Production">La Production</div>  
+                    <div class="fragment"><img src="ressources/icons/ic_local_shipping_white_24px.svg" alt="Expedition">L'expedition</div>
+                    <div class="fragment"><img src="ressources/icons/ic_call_white_24px.svg" alt="Service client">Le service client</div>
+                    <div class="fragment"><img src="ressources/icons/ic_build_white_24px.svg" alt="Maintenance">La maintenance</div>
                 </div>
             </section>
         </section>
@@ -81,6 +81,7 @@
                 <ul>
                     <li class="fragment">Effectif d'une dizaine de salariés</li>
                     <li class="fragment">1 200 000 € de chiffre d'affaire en 2016</li>
+                    <li class="fragment">Vire, Caen, Cherbourg, ...</li>
                 </ul>
             </section>
             <section data-background="ressources/background/white-background3.png">
@@ -235,45 +236,14 @@
                 <img src="ressources/api-rest.png" class="plain" height="500" alt="Fonctionnement API REST">
             </section>
             <section>
-                <h3>Les Routes</h3>
+                <h3>Les routes</h3>
                 <pre>
                     <code class="php" data-trim>
-$app->mount("/users", new UserProvider());
-
-$app->mount("/questions", new PhoneQuestionProvider());
-
-$app->mount("/documents", new DocumentProvider());
-
-$app->mount("/categories", new CategoryProvider());
-                    </code>
-                </pre>
-            </section>
-            <section>
-                <h3>Controller Provider</h3>
-                <pre>
-                    <code class="php" data-trim>
-class PhoneQuestionProvider implements ControllerProviderInterface
-{
-    public function connect(Application $app)
-    {
-        $phoneQuestions = $app["controllers_factory"];
-        $controller = '\WikiDP\Controller\PhoneQuestionController';
-
-        $phoneQuestions->get('/', $controller . '::index');
-
-        $phoneQuestions->get('/{id}', $controller . '::getById');
-
-        $phoneQuestions->post('/', $controller . '::add');
-
-        $phoneQuestions->put('/score/{id}', $controller . '::updateScoreById');
-
-        $phoneQuestions->put('/{id}', $controller . '::updateById');
-
-        $phoneQuestions->delete('/{id}', $controller . '::removeById');
-
-        return $phoneQuestions;
-    }
-}
+                        $app->get('/piece-types/{pieceTypeId}/pieces',\Controllers\PieceController::class.':findAll');
+                        $app->get('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':find');
+                        $app->post('/piece-types/{pieceTypeId}/pieces',\Controllers\PieceController::class.':create');
+                        $app->put('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':update');
+                        $app->delete('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':delete');
                     </code>
                 </pre>
             </section>
@@ -281,26 +251,24 @@ class PhoneQuestionProvider implements ControllerProviderInterface
                 <h3>Controller</h3>
                 <pre>
                     <code class="php" data-trim>
-class PhoneQuestionController implements Controller
-{
-    ...
+                        class PieceController
+                        {
+                            ...
+                            public function findAll ($request, $response, $args)
+                            {
+                                try{
+                                    $pieceService = new PieceService();
+                                    $filters = $request->getQueryParams();
 
-    public function getById($id, Application $app)
-    {
-        $statutCode = 200;
-        try {
-            $phoneQuestionService = new PhoneQuestionService();
-            $data['question'] = $phoneQuestionService->getPhoneQuestionById($id);
-        } catch (Exception $e) {
-            $statutCode = 404;
-            $data = ['message' => $e->getMessage(), 'exception' => $e];
-        }
-
-        return $app->json($data, $statutCode);
-    }
-
-    ...
-}
+                                    $data = $pieceService->findAll($filters);
+                                    return $response->withJson([ 'pieces'=> $data], 200 );
+                                } catch (\ Exception$e) {
+                                    return$response->withJson(['message' => $e->getMessage()], 500);
+                                }
+                            }
+                            ...
+                        }
+                            
                     </code>
                 </pre>
             </section>
@@ -321,11 +289,12 @@ class PhoneQuestionController implements Controller
             <section>
                 <h3>Exemple Composant React</h3>
                 <pre>
-                    <code class="javascript" data-trim>
-                        importReact from 'react';
+                    <code class="jsx" data-trim>
+                        import React from 'react';
 
                         class HelloWorld extends React.Component{
-                            constructor () {
+                            constructor (props) {
+                                super(props);
                                 this.state = {
                                     date: new Date()
                                 };
@@ -345,7 +314,7 @@ class PhoneQuestionController implements Controller
                             }
                         }
 
-                        export defaultHelloWorld;
+                        export default HelloWorld;
                     </code>
                 </pre>
             </section>
@@ -384,9 +353,9 @@ class PhoneQuestionController implements Controller
             </section>
             <section>
                 <h2>RGPD</h2>
-                <p class="fragment">Gestion des roles et ouverture a d'autres acteurs</p>
-                <p class="fragment">Update des clients</p>
-                <p class="fragment">Newsletter</p>
+                <p class="fragment">Export des données clients</p>
+                <p class="fragment">Suppression des données</p>
+                <p class="fragment">Carte d'accès</p>
             </section>
         </section>
         <section data-background="ressources/background/red-background1.png">
