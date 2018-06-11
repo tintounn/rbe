@@ -1,0 +1,121 @@
+﻿****************************************************************************************************
+****************************************************************************************************
+				 __ 	 __
+			   /\  ˜˜/   /\˜  ˜/\			 
+			  /__\/   /__\/__\   	    _____   ____  _  __     ____  __ ______ _____ 
+			 /\  /   /\  /\  /\        |  __ \ / __ \| | \ \   / /  \/  |  ____|  __ \ 
+			/__\/   /__\/  \/__\       | |__) | |  | | |  \ \_/ /| \  / | |__  | |__) |
+			\  /\  /\  /   /\  /       |  ___/| |  | | |   \   / | |\/| |  __| |  _  / 
+			 \/__\/__\/   /__\/        | |    | |__| | |____| |  | |  | | |____| | \ \
+			  \  /\  /   /\  /         |_|     \____/|______|_|  |_|  |_|______|_|  \_\
+			   \/__\/   /__\/
+
+****************************************************************************************************
+****************************************************************************************************
+
+
+----------------------------------------------------------------------------------------------------
+ * Introduction
+----------------------------------------------------------------------------------------------------
+
+Polymer est une bibliothèque JavaScript open-source permettant de construire des applications web 
+à partir de web components. La bibliothèque est développeur par les développeurs et contributeurs 
+Google sur GitHub. La bibliothèque est les composant sont tous basé sur les principes de 
+conception de Google Material Design.
+
+Polymer est utilisé par un certain nombre de services et de sites web Google,
+comme YouTube Gaming, les sites Web Google I/O, Google Play Music 
+et Google Sites.
+
+
+----------------------------------------------------------------------------------------------------
+ * Commencer avec polymer
+----------------------------------------------------------------------------------------------------
+
+- Installer Node.js (https://nodejs.org/en/)
+- Installer Git (https://git-for-windows.github.io/)
+- npm install -g bower (Bower)
+- npm install -g polymer-cli (Polymer Cli)
+- mkdir my-app && cd my-app (Création du dossier de l'application)
+- polymer init
+
+A la suite de la commande on demande quel template utiliser, parmis les suivants:
+
+  1) element - A blank element template
+  2) application - A blank application template
+  3) shop - The "Shop" Progressive Web App demo
+  4) starter-kit - A starter application template, with navigation and "PRPL pattern" loading
+
+
+----------------------------------------------------------------------------------------------------
+ * Web Components
+----------------------------------------------------------------------------------------------------
+
+- Structure d'un web component: https://en.wikipedia.org/wiki/Polymer_(library)
+
+- Propriété: https://www.polymer-project.org/1.0/docs/devguide/properties
+
+- Observer and computed: https://www.polymer-project.org/1.0/docs/devguide/observers
+
+- Array et dom-repeat: https://www.polymer-project.org/1.0/docs/devguide/model-data#array-mutation
+
+- CSS et thème: https://www.polymer-project.org/1.0/docs/devguide/styling
+				https://github.com/PolymerElements/paper-styles/blob/master/default-theme.html
+
+
+----------------------------------------------------------------------------------------------------
+- Autres fonctionnalitées
+----------------------------------------------------------------------------------------------------
+
+- Dom-if
+- Notify
+- Optimize Production (build, bundled)
+- Test Element
+- Service workers
+- ...
+
+Toutes les infos: https://www.polymer-project.org/1.0/
+
+
+----------------------------------------------------------------------------------------------------
+ * Documentation Web Components
+----------------------------------------------------------------------------------------------------
+
+Lors de la création d'un web component la documentation de celui-ci est générer automatiquement.
+On peut aussi crée une démo du web component pour accompagner la documentation.
+
+
+----------------------------------------------------------------------------------------------------
+ * Polymer Element
+----------------------------------------------------------------------------------------------------
+
+Bibliothèque de web component Polymer Google: https://elements.polymer-project.org/
+Bibliothèque de web component: https://www.webcomponents.org/
+Bibliothèque de web component vaadin: https://vaadin.com/elements
+
+
+----------------------------------------------------------------------------------------------------
+ * Les polycasts
+----------------------------------------------------------------------------------------------------
+
+Tutoriel vidéo crée par l'équipe de Google chrome développeur, pour apprendre Polymer.
+
+
+----------------------------------------------------------------------------------------------------
+ * Qui utilise Polymer en production
+----------------------------------------------------------------------------------------------------
+
+https://github.com/Polymer/polymer/wiki/Who's-using-Polymer%3F
+
+
+----------------------------------------------------------------------------------------------------
+ * Liens utiles
+----------------------------------------------------------------------------------------------------
+
+Wikipedia: https://en.wikipedia.org/wiki/Polymer_(library)
+Polymer: https://www.polymer-project.org/1.0/
+Demo Shop Polymer: https://shop.polymer-project.org/
+Polyicon: https://poly-icon.appspot.com/
+Polycast: https://www.youtube.com/playlist?list=PLOU2XLYxmsII5c3Mgw6fNYCzaWrsM3sMN
+GitHub Polymer: https://github.com/Polymer
+GitHub PolymerLabs: https://github.com/PolymerLabs

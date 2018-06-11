@@ -92,14 +92,14 @@ class ContactPage extends React.Component<ContactPageProps, ContactPageState> {
           <label>
             Votre email
           </label>
-          <Input onChange={this.onInputValueChange} name="email" type="text" placeholder="Votre email pour recontact"/>
+          <Input onChange={this.onInputValueChange} name="email" type="text"/>
 
           <br/>
 
           <label>
             Sujet de la demande
           </label>
-          <Input onChange={this.onInputValueChange} name="sujet" type="text" placeholder="Le sujet de votre demande"/>
+          <Input onChange={this.onInputValueChange} name="sujet" type="text"/>
 
           <br/>
 

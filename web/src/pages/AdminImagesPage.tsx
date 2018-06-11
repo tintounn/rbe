@@ -45,7 +45,6 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
       url: 'http://api.rbe-ouest.com/pieces',
       params: {
         location: this.state.location,
-        token: sessionStorage.getItem('rbe_token')
       }
     }).then((res) => {
       this.setState({
@@ -70,7 +69,6 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
 
     axios.put('http://api.rbe-ouest.com/pieces/' + this.state.pieces[index].id, {
       ordre: value,
-      token: sessionStorage.getItem('rbe_token')
     }).then((res) => {
       this.refreshList();
     }).catch((err) => {
@@ -92,7 +90,6 @@ class AdminImagesPage extends React.Component<AdminImagesPageProps, AdminImagesP
     data.append('libelle', this.state.description);
     data.append('file', this.state.file);
     data.append('location', this.state.location);
-    data.append('token', sessionStorage.getItem('rbe_token'));
 
     axios.post('http://api.rbe-ouest.com/pieces', data)
       .then((res) => {
