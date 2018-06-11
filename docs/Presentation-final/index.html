@@ -30,7 +30,7 @@
                     <li class="fragment">Conception et developpement de projet pour les clients.</li>
                     <li class="fragment">Vente et marquage de textiles et objets publicitaires.</li>
                 </ul>
-                <p><u>Conception de projet minoritaire.</u></p>
+                <p class="fragment"><u>Conception de projet minoritaire.</u></p>
             </section>
             <section class="smallSection textAlignJustify">
                 <p>Design’ Partner conçoit des applications Web a destination les clients qui le souhaitent </p>
@@ -70,7 +70,7 @@
             </section>
         </section>
 
-        <section data-transition="zoom-in" data-background="ressources/background/white-background1.png">
+        <section data-transition="zoom-in" data-background="ressources/background/white-background3.png">
             <section>
                 <img class="imgCircle" src="ressources/logo-dp-background.png" alt="Présentation de l'entreprise">
                 <h2>Présentation du client</h2>
@@ -240,9 +240,13 @@
                 <pre>
                     <code class="php" data-trim>
                         $app->get('/piece-types/{pieceTypeId}/pieces',\Controllers\PieceController::class.':findAll');
+
                         $app->get('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':find');
+
                         $app->post('/piece-types/{pieceTypeId}/pieces',\Controllers\PieceController::class.':create');
+
                         $app->put('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':update');
+                        
                         $app->delete('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':delete');
                     </code>
                 </pre>
