@@ -72,7 +72,7 @@
 
         <section data-transition="zoom-in" data-background="ressources/background/white-background3.png">
             <section>
-                <img class="imgCircle" src="ressources/logo-dp-background.png" alt="Présentation de l'entreprise">
+                <img src="ressources/rbe-icon.png" alt="Présentation de l'entreprise">
                 <h2>Présentation du client</h2>
             </section>
             <section class="smallSection textAlignJustify">
@@ -246,7 +246,7 @@
                         $app->post('/piece-types/{pieceTypeId}/pieces',\Controllers\PieceController::class.':create');
 
                         $app->put('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':update');
-                        
+
                         $app->delete('/piece-types/{pieceTypeId}/pieces/{id}',\Controllers\PieceController::class.':delete');
                     </code>
                 </pre>
