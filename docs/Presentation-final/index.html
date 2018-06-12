@@ -30,7 +30,6 @@
                     <li class="fragment">Conception et developpement de projet pour les clients.</li>
                     <li class="fragment">Vente et marquage de textiles et objets publicitaires.</li>
                 </ul>
-                <p class="fragment"><u>Conception de projet minoritaire.</u></p>
             </section>
             <section class="smallSection textAlignJustify">
                 <p>Design’ Partner conçoit des applications Web a destination les clients qui le souhaitent </p>
@@ -153,19 +152,19 @@
             </section>
             <section data-background="ressources/background/white-background3.png">
                 <h3>Use case</h3>
-                <img src="ressources/usecase.png" class="plain" height="500" alt="Use case">
+                <img src="ressources/image13.png" class="plain" height="500" alt="Use case">
             </section>
             <section data-background="ressources/background/white-background2.png">
-                <h3>Maquette</h3>
-                <img src="ressources/usecase.png" class="plain" height="500" alt="Use case">
+                <h2>Maquette</h2>
             </section>
             <section data-background="ressources/background/white-background1.png">
-                <h3>Maquette</h3>
-                <img src="ressources/usecase.png" class="plain" height="500" alt="Use case">
+                <img src="ressources/image14.png" class="plain" height="500" alt="Use case">
             </section>
             <section data-background="ressources/background/white-background4.png">
-                <h3>Maquette</h3>
-                <img src="ressources/usecase.png" class="plain" height="500" alt="Use case">
+                <img src="ressources/image1.png" class="plain" height="500" alt="Use case">
+            </section>
+            <section data-background="ressources/background/white-background4.png">
+                <img src="ressources/image17.png" class="plain" height="500" alt="Use case">
             </section>
         </section>
         <section data-transition="zoom-in">
@@ -277,6 +276,39 @@
                 </pre>
             </section>
             <section>
+                <h3>DAO</h3>
+                <pre>
+                    <code class="php" data-trim>
+                        public function findAll (array $filters = [], $limit = null)
+                        {
+                            $result = [];
+                            $sqlConditions = "";
+                            if (!empty($filters)) {
+                                $sqlConditions = $this->generateConditionRequest($filters);
+                                $sqlParamsConditions = array_values($filters);
+                            }
+                            $cnx = MyDB::getConnection();
+                            $sql = "SELECT * FROM " . self ::TABLE_NAME . $sqlConditions;
+                            $sth = $cnx->prepare($sql);
+                            $sth->execute($sqlParamsConditions);
+                            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+
+                            return $result;
+                        } 
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Resultat</h3>
+                <pre>
+                    <code class="sql" data-trim>
+                        SELECT *
+                        FROM pieces AS p
+                        JOIN pieces_types AS pt ON (pt.id = p.piece_type_id);
+                    </code>
+                </pre>
+            </section>
+            <section>
                 <h3>Test de l'api</h3>
                 <img src="ressources/postman.png" alt="Postman">
             </section>
@@ -329,22 +361,22 @@
                 <h2>Présentation de l'application</h2>
             </section>
             <section>
-                <img src="ressources/demonstration/home.PNG" alt="Ecran de connexion">
+                <img src="ressources/demonstration/home.png" alt="Ecran de connexion">
             </section>
             <section>
-                <img src="ressources/demonstration/ddevis.PNG" alt="Ecran de développement">
+                <img src="ressources/demonstration/ddevis.png" alt="Ecran de développement">
             </section>
             <section>
-                <img src="ressources/demonstration/images.PNG" alt="Ecran list document">
+                <img src="ressources/demonstration/images.png" alt="Ecran list document">
             </section>
             <section>
-                <img src="ressources/demonstration/devis.PNG" alt="Ecran exemple de document">
+                <img src="ressources/demonstration/devis.png" alt="Ecran exemple de document">
             </section>
             <section>
-                <img src="ressources/demonstration/chantier.PNG" alt="Ecran de nouveau document">
+                <img src="ressources/demonstration/chantier.png" alt="Ecran de nouveau document">
             </section>
             <section>
-                <img src="ressources/demonstration/chantiers.PNG" alt="Ecran modération de document">
+                <img src="ressources/demonstration/chantiers.png" alt="Ecran modération de document">
             </section>
         </section>
         <section data-background="ressources/background/darkgrey-background4.png">
